@@ -1,0 +1,93 @@
+body {
+  padding-top: 70px;
+}
+
+.text-lg, .text-lg .fa {
+  font-size: 1.3em;
+}
+
+.icon-login {
+    display: block;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.3em;
+    padding: 5px 0 0 0;
+    margin-right: 5px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+
+.icon-facebook {
+    background-color: #3b5998;
+}
+
+.icon-google {
+    background-color: #B0281A;
+}
+
+.rating-list {
+  line-height: 1;
+
+  display: inline-block;
+  min-width: 10px;
+
+  white-space: nowrap;
+  font-size:0.8em;
+  cursor: pointer;
+
+}
+
+h1 {
+	margin-top: 0px;
+}
+
+.img-responsive {
+	margin:0 auto;
+}
+
+#servicoList {
+	overflow: hidden;
+}
+
+.star-rating{
+	font-size: 1.1em;
+}
+
+/*****************CSS - Novo Layout*********************/
+.navbar{
+  background-color: #FF4E00;
+}
+
+.list-group-item {
+  position: relative;
+  display: inline;
+  margin: 5px 2px;
+  margin-bottom: -1px;
+  padding: 0 7px;
+  background-color: #ffffff;
+  border: none;
+  border-right: 1px solid #BCBCBC;
+
+}
+
+.search{
+  color: #666666;
+  font-size: 18px;
+}
+
+.divSearch{
+  background-color: #DDDDDD;
+}
+
+.btn-pesquisar{
+  float:right;
+  margin-top:20px
+}
+
+.divSearch input, select{
+  background-color: #FFF;
+  border-color: #FF4E00;
+}

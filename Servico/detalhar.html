@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+	<title>Workbook</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/workbook.css" rel="stylesheet">
+
+    <script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
+	<script type="text/javascript" src="../js/angular.js"></script>
+	<script type="text/javascript" src="../js/angular-cookies.js"></script>
+	<script type="text/javascript" src="../js/checklist-model.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/controllers/avaliacao.js"></script>
+	<script type="text/javascript" src="../js/controllers/servico.js"></script>
+	<script type="text/javascript" src="../js/controllers/user.js"></script>
+	<script type="text/javascript" src="../js/controllers/categoria.js"></script>
+
+	<base href="/Servico/detalhar.html" />
+</head>
+<body>
+<!-- Fixed navbar -->
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">WorkBook</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="userLogadoController">
+            <ul class="nav navbar-nav navbar-right">
+			
+								
+				<li class="dropdown" ng-if="!facebookUser">
+					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="/login">Entrar</a>
+					<ul id="g-account-menu" class="dropdown-menu" role="menu">
+                        <li><a href="/login">Entrar</a></li>
+                        <li><a href="/facebook_login.html">Logar com Facebook</a></li>
+                        <li><a href="/usuario/criar.html">Registrar</a></li>
+                    </ul>
+				</li>
+
+				<li ng-if="facebookUser" class="dropdown"><a href="#">{{facebookUser.name}}</a></li>				
+				
+				<li><a href="/categoria/listar.html">Categorias</a></li>
+                <li><a href="/Servico/form.html">Cadastrar Serviço</a></li>
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+	                    <i class="glyphicon glyphicon-user"></i>
+	               
+	                    <span class="caret"></span>
+                    </a>
+                    <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                        <li><a href="/logout">Sair</a></li>
+                    </ul>
+                </li>
+			
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<aside id="main" class="col-md-12" ng-controller="detalharServico">
+		<img class="img-responsive" src="http://placehold.it/1140x400" alt="">
+		<div class="col-md-9">
+			<h1>{{servico.titulo}}</h1>
+			<div>{{servico.descricao}}</div>
+		</div>
+		<div class="col-md-3">
+			<h4>Avaliação</h4>
+			<div class="text-lg text-warning">
+				<!--<input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="{{servico.media}}" data-show-clear="false" data-show-caption="false">-->
+				<span ng-if="servico.media %2 >0" class="fa fa-star-half-o" data-size="xs" ></span>
+				<span ng-repeat="n in [1,2,3,4,5]" ng-if="n <= servico.media" class="fa fa-star" >
+			</div>
+			<div>
+				<span class="text-lg" title="Total de avaliações">{{servico.total}} Avaliações</span>
+			</div>
+			<h4>Categoria</h4>
+			<div>{{servico.categoria.nome}}</div>
+			<h4>Contatos</h4>
+			<div>
+				<b>Telefone:</b> {{servico.telefone}}
+			</div>
+			<div>
+				<b>Celular:</b> {{servico.celular}}
+			</div>
+			<div>
+				<a class="btn btn-success" href="../orcamento/solicitar.html#/?prestador={{servico.usuario}}">Solicitar orçamento</a>
+			</div>
+			<p>&nbsp;</p>
+		</div>
+		<div class="col-md-12" ng-controller="avaliacaoController">
+			<div class="well">
+				
+				<div class="text-left col-md-6" ng-if="avaliacoesAmigos.length >=1">
+					<h3>Veja o que seus amigos falaram sobre este serviço</h3>
+				</div>
+				<div class="text-right">
+					<a href="/Avaliacao/criar.html#/?servicoID={{servico.id}}" class="btn btn-success">Deixe sua opni&atilde;o</a>
+				</div>
+			
+				<hr>
+				<div class="row" ng-repeat="avaliacao in avaliacoesAmigos" >   
+					<div class="col-md-12">
+							<span <input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" ng-model="nota" value="{{avaliacao.nota }}" data-show-clear="false" data-show-caption="false"></span>
+							<span ng-if="avaliacao.nota %2 >0" class="fa fa-star-half-o pull-right" ></span>
+							<span ng-repeat="n in [1,2,3,4,5]" ng-if="n <= avaliacao.nota" class="fa fa-star pull-right" ></span>
+			                <b>{{avaliacao.usuario.firstName}} {{avaliacao.usuario.lastName}}</b>
+			                <p>{{avaliacao.comentario}}</p>
+			            </div>
+		        </div>
+		        <div class="text-left col-md-6" ng-if="avaliacoes.length >=1">
+					<h3>Opiniões de outros usuários</h3>
+				</div>
+		        <div class="row" ng-repeat="avaliacao in avaliacoes">   
+					<div class="col-md-12">
+							<span <input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" ng-model="nota" value="{{avaliacao.nota }}" data-show-clear="false" data-show-caption="false"></span>
+							<span ng-if="avaliacao.nota %2 >0" class="fa fa-star-half-o pull-right" ></span>
+							<span ng-repeat="n in [1,2,3,4,5]" ng-if="n <= avaliacao.nota" class="fa fa-star pull-right" ></span>
+			                <b>{{avaliacao.avaliador.firstName}} {{avaliacao.avaliador.lastName}}</b>
+			                <p>{{avaliacao.comentario}}</p>
+			            </div>
+		        </div>
+
+			
+				<div ng-if="avaliacoesAmigos.length <1 && avaliacoes.length <1">Ainda não foi feito nenhum comentário</div>
+        	</div>
+
+	</aside>
+	</body>
+
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/star-rating.min.js"></script>
+</html>

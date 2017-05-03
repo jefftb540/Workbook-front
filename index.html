@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+	<title>Workbook</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/workbook.css" rel="stylesheet">
+
+    <script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
+	<script type="text/javascript" src="js/angular.js"></script>
+	<script type="text/javascript" src="js/angular-cookies.js"></script>
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/controllers/avaliacao.js"></script>
+	<script type="text/javascript" src="js/controllers/servico.js"></script>
+	<script type="text/javascript" src="js/controllers/user.js"></script>
+	<script type="text/javascript" src="js/controllers/categoria.js"></script>
+</head>
+<body>
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">WorkBook</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="avaliacaoController">
+            <ul class="nav navbar-nav navbar-right">
+			
+								
+				<li class="dropdown" >
+					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="/login">Entrar</a>
+					<ul id="g-account-menu" class="dropdown-menu" role="menu">
+                        <li><a href="/login">Entrar</a></li>
+                        <li><a href="/facebook_login.html">Logar com Facebook</a></li>
+                        <li><a href="/usuario/criar.html">Registrar</a></li>
+                    </ul>
+				</li>
+
+				<li ng-if="facebookUser" class="dropdown"><a href="#">{{facebookUser.name}}</a></li>				
+				
+				<li><a href="/categoria/listar.html">Categorias</a></li>
+                <li><a href="/Servico/form.html">Cadastrar Serviço</a></li>
+                
+                <li class="dropdown">
+                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+	                    <i class="glyphicon glyphicon-user"></i>
+	               
+	                    <span class="caret"></span>
+                    </a>
+                    <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                        <li><a href="/logout">Sair</a></li>
+                    </ul>
+                </li>
+			
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+	<aside id="left" class="row">
+		<div ng-controller="categoriaController" class="list-group categorias">
+			<ul class="list-group-item">
+				<li class="list-group-item" ng-repeat="categoria in categorias.data">
+					<a href="#">{{categoria.nome}}</a>
+				</li>
+			</ul>
+		</div>
+	</aside>
+	<div class="col-sm-12">
+		<div class="col-sm-6">Propaganda do App</div>
+		<div class="col-sm-6 divSearch">
+			<form class="navbar-form navbar-left" role="search">
+				<p class="search">Encontre o serviço que você procura:</p>
+                <div class="form-group col-sm-6">
+                    <!--<select class="form-control" placeholder="Categoria">
+                    	<c:forEach items="" var="categoria">	
+							<option name=""></option> 
+						</c:forEach>
+                    </select>-->
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" class="form-control" placeholder="Pesquisar">
+                </div>
+                <div class="col-sm-12">
+                	<button type="submit" class="btn btn-default btn-pesquisar" >Pesquisar</button>
+                </div>
+            </form>
+		</div>
+	</div>
+	<div id="main" class="col-sm-12" align="center">
+		<div class="row carousel slide" data-ride="carousel">
+		<div class="carousel-inner" ng-controller="servicoController">
+		
+			<div class="item active" style="width:940px; heigth:350px"><h1><center>Workbook</center></h1></div>
+			<div class="item" ng-repeat="servico in servicos.data">
+				<a href="Servico/detalhar.html#/?servicoID={{servico.id}}"><img src="http://placehold.it/940x350" /></a>
+			</div>
+
+		</div>
+		</div>
+	</div>
+
+</body>
+
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+</html>
+<!--<div class="item active" ng-controller="servicoController">primeiro</div>
+		
+		<div class="col-sm-6 col-md-6 col-lg-4 item" ng-repeat="servico in servicos.data">
+			<div class="thumbnail">
+				<img src="http://placehold.it/350x120" alt="">
+				<div class="caption">
+
+				<h3><a href="/servico/detalhar/${{servico.id}}">{{servico.titulo}}</a></h3>
+				</div>
+				<div class="caption hidden-xs">
+					<p class="text-list">{{servico.descricao}}</p>
+				</div>
+	            <div class="caption ratings">
+	            	<input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="{{servico.media }}" data-show-clear="false" data-show-caption="false">
+	           	</div>
+	         </div>
+		</div>
+-->
