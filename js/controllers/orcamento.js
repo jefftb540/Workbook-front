@@ -14,10 +14,11 @@ angular.module("MyApp").controller('orcamentoController',['$scope','$http', '$co
 		//window.location.href = "/Servico/detalhar.html#/?servicoID="+servicoID
 	});
 	
-	
+	$scope.ids={servicos:[]}
 	$scope.submitForm = function(orcamento){
 		
 		orcamento.solicitacao = $location.search().solicitacao;
+		orcamento.servicos_atendidos = $scope.ids.servicos;
 		console.log(orcamento);
 		$http({
 				data: orcamento,

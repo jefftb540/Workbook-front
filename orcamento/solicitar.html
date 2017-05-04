@@ -78,6 +78,11 @@
 				</div> 
 				<label for="data_inicio">Preciso do serviço entre os dias:</label>
 				<input type="date" name="data_inicio" ng-model="solicitacao.data_inicio" /> e <input type="date" name="data_inicio" ng-model="solicitacao.data_fim">
+				Horário preferível de atendimento: Entre 
+				<input ng-model="solicitacao.hora_inicio" type="number" min="0" max="23">:
+				<input ng-model="solicitacao.minutos_inicio" type="number" min="0" max="60" name=""> e 
+				<input ng-model="solicitacao.hora_fim" type="number" min="0" max="23">:
+				<input ng-model="solicitacao.minutos_inicio" type="number" min="0" max="60" name="">
 				<button type="submit" class="btn btn-success">Solicitar Orçamento</button>
 			</form>
 		</div>

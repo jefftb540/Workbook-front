@@ -72,18 +72,23 @@
 <aside id="main" class="col-md-12" ng-controller="orcamentoController">
 		<div class="col-md-6" >
 			<p>{{solicitacao.descricao}}</p>
-			<p ng-repeat="s in solicitacao.servico">Servico: {{s}}</p>
+			<p ng-repeat="s in solicitacao.servico">Servico: {{s.titulo}}</p>
 			<p>O serviço deverá ser realizado entre os dias {{solicitacao.data_inicio}} e {{solicitacao.data_fim}}</p>
+			<p>Horário preferível de atendimento: Entre {{solicitacao.hora_inicio}}:{{("0"+solicitacao.minutos_inicio).slice(-2)}} e {{solicitacao.hora_fim}}:{{("0"+solicitacao.minutos_fim).slice(-2)}}
 		</div>
 		<div class="col-md-6">
 			<form ng-submit="submitForm(orcamento)">
 				<label for="descricao" >Comentário</label>
-				<textarea name="descricao" rows="5" class="form-control" ng-model="orcamento.descricao"></textarea>
+				<div ng-repeat="s in solicitacao.servico">
+					<input type="checkbox" checklist-model="ids.servicos" checklist-value="s.id">{{s.titulo}}
+				</div>
 				<label for="valor">Valor do Serviço</label>
 				<input type="number" name="valor" ng-model="orcamento.valor" />
 				<label for="validade">Validade do orçamento</label>
 				<input type="date" name="validade" ng-model="orcamento.validade">
-				<button type="submit" class="btn btn-success">Solicitar Orçamento</button>
+				<label for="validade">Data de atendimento</label>
+				<input type="date" name="validade" ng-model="orcamento.data_atendimento">
+				<button type="submit" class="btn btn-success">Enviar Orçamento</button>
 			</form>
 		</div>
 

@@ -42,8 +42,7 @@ angular.module("MyApp").controller('solicitacaoController',['$scope','$http', '$
 
 			}).then(function(data){
 				$scope.retorno = data;
-				var send = angular.toJson(solicitacao);
-		console.log(send);
+				console.log($scope.retorno);
 				//console.log(data)
 				//window.location.href = "/Servico/detalhar.html#/?servicoID="+servicoID
 			});
