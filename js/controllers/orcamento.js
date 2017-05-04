@@ -38,3 +38,42 @@ angular.module("MyApp").controller('orcamentoController',['$scope','$http', '$co
 
 	}
 }]);
+
+angular.module("MyApp").controller('confirmarOrcamentoController',['$scope','$http', '$cookies', '$location', function listar($scope, $http, $cookies, $location){
+	var servicos;
+	$http({
+		url: path+"orcamentos/"+$location.search().orcamento,
+		
+   		headers: {
+   			"authorization": 'Bearer ' + $cookies.get("access_token"),
+   			'Content-Type': 'application/json'
+   		},
+
+	}).then(function(data){
+		$scope.orcamento = data.data;
+		console.log($scope.orcamento)
+		//window.location.href = "/Servico/detalhar.html#/?servicoID="+servicoID
+	});
+
+	$scope.confirmar = function(){
+		$scope.orcamento.status = "confirmado"
+		data = $scope.orcamento.data_atendimento.split("/")
+		$scope.orcamento.data_atendimento = data[2]+'-'+data[1]+'-'+data[0]+"T00:00";
+		console.log($scope.orcamento)
+		$http({
+			data: $scope.orcamento,
+			method: "post",
+			url: path+"servicos/orcamento/atualizar/",
+			
+	   		headers: {
+	   			"authorization": 'Bearer ' + $cookies.get("access_token"),
+	   			'Content-Type': 'application/json'
+	   		},
+
+		}).then(function(data){
+			$scope.retorno = data;
+			//console.log(data)
+		});
+
+	}
+}]);	

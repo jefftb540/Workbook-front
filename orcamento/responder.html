@@ -88,6 +88,8 @@
 				<input type="date" name="validade" ng-model="orcamento.validade">
 				<label for="validade">Data de atendimento</label>
 				<input type="date" name="validade" ng-model="orcamento.data_atendimento">
+				<label for="horario">Horário de atendimento</label>
+				<input type="number" name="horario" max="23" min="0" ng-model="orcamento.hora_atendimento">:<input type="number" name="horario" max="59" min="0" ng-model="orcamento.minutos_atendimento">
 				<button type="submit" class="btn btn-success">Enviar Orçamento</button>
 			</form>
 		</div>
