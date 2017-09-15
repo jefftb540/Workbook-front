@@ -1,13 +1,17 @@
-angular.module("MyApp").controller('categoriaController',['$scope','$http', function listar($scope, $http){
+angular.module("MyApp").controller('categoriaController',['$scope','$http', '$cookies', function listar($scope, $http, $cookies){
 	$http({
 		method: "get",
 		url: path+"categorias/all/",
 		responseType: "json",
 		 crossDomain: true,
+		 headers:{
+		 	'Content-Type': 'application/json',
+	   		"authorization": 'Bearer ' + $cookies.get("access_token"),
+		 },
 
 	}).then(function(data){
-		categorias = data.data;
-		$scope.categorias = data;
+		$scope.categorias = data.data;
+		
 		console.log($scope.categorias);
 	});
 
@@ -19,7 +23,9 @@ angular.module("MyApp").controller('categoriaController',['$scope','$http', func
 		method: "post",
 		url: path+"/categoria/criar/",
 		
-   		headers: {'Content-Type': 'application/json'},
+   		headers: {
+   			'Content-Type': 'application/json'
+   	},
 		//responseType: "json",
 		 //crossDomain: true,
 

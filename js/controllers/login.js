@@ -13,7 +13,7 @@ angular.module("MyApp").controller('loginController',['$scope','$http', '$locati
 	    	console.log("Executado")
 		    var req = {
 	            method: 'POST',
-	            url: "http://localhost:8000/o/token/",
+	            url: path+"o/token/",
 	            headers: {
 	                "Authorization": "Basic " + $scope.encoded,
 	                "Content-type": "application/x-www-form-urlencoded",
@@ -28,11 +28,17 @@ angular.module("MyApp").controller('loginController',['$scope','$http', '$locati
 	        console.log(req)
 	        $http(req).success(function(data){
 		        $http.defaults.headers.common.Authorization = 'Bearer ' + data.access_token;
+		        var expireDate = new Date();
+  				expireDate.setDate(expireDate.getDate() + 1);
 	            $cookies.put("access_token", data.access_token);
-	            console.log(data);
+	            $scope.mensagem = "Logado"
+	            
 	        }).error(function(data){
-	        	console.log(data)
-	        });
+	        	$scope.mensagem = "não logado"
+
+	        })
+
+
        	}
 	
 }]);

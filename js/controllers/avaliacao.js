@@ -1,5 +1,5 @@
 angular.module("MyApp").controller('avaliacaoController',['$scope','$http', '$location', '$cookies', function listar($scope, $http, $location, $cookies){
-	servicoID = $location.search().servicoID;
+	servicoID = $location.search().prestadorID;
 	var usuarioID = sessionStorage.getItem("usuario");
 	$http({
 
@@ -72,24 +72,10 @@ angular.module("MyApp").controller('avaliacaoController',['$scope','$http', '$lo
 				console.log($scope.avaliacoes);
 			});
 		});*/
-		$scope.avaliacao = {}
 		$scope.submitForm = function(avaliacao){
-			avaliacao.nota = 3;
-			var servico;
 			var usuario;
-			$scope.avaliacao = avaliacao;
-			$http({
-				url: path+"servicos/"+servicoID,
-				method: 'get',
-				headers: {
-	   			"authorization": 'Bearer ' + $cookies.get("access_token"),
-	   			'Content-Type': 'application/json'
-	   		},
-			}).then(function(data){
-				avaliacao.servico = data.data.id;
-				//console.log(servico);
-			});
-
+			avaliacao.prestador = $location.search().prestadorID;
+			avaliacao.nota = $('#star-rating').val()
 			$http({
 				url: path+"usuarios/ativo",
 				method: 'get',
@@ -98,29 +84,22 @@ angular.module("MyApp").controller('avaliacaoController',['$scope','$http', '$lo
 	   			'Content-Type': 'application/json'
 	   		},
 			}).then(function(data){
-				avaliacao.avaliador = data.data.id;
-				//console.log(usuario);
-			});
-			console.log(avaliacao)
-			//console.log(avaliacao)
-			var send = angular.toJson(avaliacao);
-			console.log(send);
-			
-			
+				avaliacao.avaliador = data.data.id;		
 			$http({
-				data: avaliacao,
-				method: "post",
-				url: path+"servicos/avaliacoes/criar/",
-				
-		   		headers: {
-		   			"authorization": 'Bearer ' + $cookies.get("access_token"),
-		   			'Content-Type': 'application/json'
-		   		},
+					data: avaliacao,
+					method: "post",
+					url: path+"servicos/avaliacoes/criar/",
+					
+			   		headers: {
+			   			"authorization": 'Bearer ' + $cookies.get("access_token"),
+			   			'Content-Type': 'application/json'
+			   		},
 
-			}).then(function(data){
-				$scope.retorno = data;
-				//console.log(data)
-				//window.location.href = "/Servico/detalhar.html#/?servicoID="+servicoID
+				}).then(function(data){
+					$scope.retorno = data;
+				});
+					
 			});
+			
 	};
 }]);

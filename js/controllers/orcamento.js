@@ -55,10 +55,8 @@ angular.module("MyApp").controller('confirmarOrcamentoController',['$scope','$ht
 		//window.location.href = "/Servico/detalhar.html#/?servicoID="+servicoID
 	});
 
-	$scope.confirmar = function(){
-		$scope.orcamento.status = "confirmado"
-		data = $scope.orcamento.data_atendimento.split("/")
-		$scope.orcamento.data_atendimento = data[2]+'-'+data[1]+'-'+data[0]+"T00:00";
+	$scope.atualizar = function(status){
+		$scope.orcamento.status = status
 		console.log($scope.orcamento)
 		$http({
 			data: $scope.orcamento,

@@ -2,130 +2,107 @@
 <html ng-app="MyApp">
 <head>
 	<title>Workbook</title>
-	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/workbook.css" rel="stylesheet">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel='stylesheet' href='css/font.css'>
+    <link href="css/icon.css"
+      rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
 
-    <script type="text/javascript" src="//connect.facebook.net/en_US/sdk.js"></script>
-	<script type="text/javascript" src="js/angular.js"></script>
+	<link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+<link rel="stylesheet" href="node_modules/angular-material-time-picker/dist/md-time-picker.css"/>
+
+    
+
+    <script type="text/javascript" src="js/sdk.js"></script>
+	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+
+	<script type="text/javascript" src="bower_components/angular-base64-upload/src/angular-base64-upload.js"></script>
+	<script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
+	<script type="text/javascript" src="bower_components/angular-material-sidemenu/dest/angular-material-sidemenu.js"></script>
+	<script type="text/javascript" src="bower_components/angular-messages/angular-messages.js"></script>
+
 	<script type="text/javascript" src="js/angular-cookies.js"></script>
+	<script type="text/javascript" src="js/angular-route.js"></script>
+	<script type="text/javascript" src="js/checklist-model.js"></script>
+
 	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="bower_components/angular-aria/angular-aria.js"></script>
+	<script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
+	<script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
+	<script type="text/javascript" src="node_modules/angular-material-time-picker/dist/md-time-picker.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/config.js"></script>
 	<script type="text/javascript" src="js/controllers/avaliacao.js"></script>
 	<script type="text/javascript" src="js/controllers/servico.js"></script>
 	<script type="text/javascript" src="js/controllers/user.js"></script>
 	<script type="text/javascript" src="js/controllers/categoria.js"></script>
+	<script type="text/javascript" src="js/controllers/orcamento.js"></script>
+	<script type="text/javascript" src="js/controllers/solicitacao.js"></script>
+	<script type="text/javascript" src="js/controllers/search.js"></script>
+	<script type="text/javascript" src="js/controllers/login.js"></script>
+	<script type="text/javascript" src="js/controllers/mensagem.js"></script>
+
+	
 </head>
 <body>
+
 <!-- Fixed navbar -->
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">WorkBook</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse" ng-controller="avaliacaoController">
-            <ul class="nav navbar-nav navbar-right">
-			
-								
-				<li class="dropdown" >
-					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="/login">Entrar</a>
-					<ul id="g-account-menu" class="dropdown-menu" role="menu">
-                        <li><a href="/login">Entrar</a></li>
-                        <li><a href="/facebook_login.html">Logar com Facebook</a></li>
-                        <li><a href="/usuario/criar.html">Registrar</a></li>
-                    </ul>
-				</li>
+	<div layout="column" flex layout-fill style="height: 100%" ng-controller="mainController">
+		<md-toolbar>
+			<div class="md-toolbar-tools" ng-controller="searchController">
 
-				<li ng-if="facebookUser" class="dropdown"><a href="#">{{facebookUser.name}}</a></li>				
-				
-				<li><a href="/categoria/listar.html">Categorias</a></li>
-                <li><a href="/Servico/form.html">Cadastrar Serviço</a></li>
-                
-                <li class="dropdown">
-                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-	                    <i class="glyphicon glyphicon-user"></i>
-	               
-	                    <span class="caret"></span>
-                    </a>
-                    <ul id="g-account-menu" class="dropdown-menu" role="menu">
-                        <li><a href="/logout">Sair</a></li>
-                    </ul>
-                </li>
-			
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
-	<aside id="left" class="row">
-		<div ng-controller="categoriaController" class="list-group categorias">
-			<ul class="list-group-item">
-				<li class="list-group-item" ng-repeat="categoria in categorias.data">
-					<a href="#">{{categoria.nome}}</a>
-				</li>
-			</ul>
-		</div>
-	</aside>
-	<div class="col-sm-12">
-		<div class="col-sm-6">Propaganda do App</div>
-		<div class="col-sm-6 divSearch">
-			<form class="navbar-form navbar-left" role="search">
-				<p class="search">Encontre o serviço que você procura:</p>
-                <div class="form-group col-sm-6">
-                    <!--<select class="form-control" placeholder="Categoria">
-                    	<c:forEach items="" var="categoria">	
-							<option name=""></option> 
-						</c:forEach>
-                    </select>-->
-                </div>
-                <div class="form-group col-sm-6">
-                    <input type="text" class="form-control" placeholder="Pesquisar">
-                </div>
-                <div class="col-sm-12">
-                	<button type="submit" class="btn btn-default btn-pesquisar" >Pesquisar</button>
-                </div>
-            </form>
-		</div>
-	</div>
-	<div id="main" class="col-sm-12" align="center">
-		<div class="row carousel slide" data-ride="carousel">
-		<div class="carousel-inner" ng-controller="servicoController">
+	        	<md-button class="md-icon-button" aria-label="Settings" ng-click="openLeftMenu()">
+	          		<md-icon ng-if="qtdNotificacoes == 0" class="text-primary-color material-icons step" aria-label="description">menu</md-icon>
+	          		<md-icon ng-if="qtdNotificacoes >10" class="text-primary-color material-icons step" aria-label="description">filter_9_plus</md-icon>
+	          		<md-icon ng-if="qtdNotificacoes > 0 && qtdNotificacoes < 10" class="text-primary-color material-icons step" aria-label="description">filter_{{qtdNotificacoes}}</md-icon>
+
+	        	</md-button>
+
+		      	<h2 md-truncate flex ng-show="!showSearch" class="text-primary-color">Workbook</h2>
+		      	<form ng-submit="submitForm(search)">
+			      	<md-input-container md-no-float flex ng-show="showSearch">
+			      		<label>Serviço ou prestador</label>
+			      		<input  type="search" ng-model="search.query">
+			      	</md-input-container>
+		      	</form>
+		      	<md-button class="md-icon-button " aria-label="Favorite" ng-click="toogleSearch()">
+	          		<md-icon class="text-primary-color">search</md-icon>
+	        	</md-button>
+		    </div>
+		</md-toolbar>
+		<md-sidenav md-component-id="left" class="md-sidenav-left">	
+			<md-toolbar class="md-theme-indigo">
+		    	<h1 class="md-toolbar-tools">Menu principal</h1>
+		    </md-toolbar>
+		    <md-content layout-padding>
+				<md-list flex  style="padding:8px 0">
+					<md-list-item class="md-1-line" style="padding:2px 0">
+			        	<md-button md-no-ink class="md-primary" layout-align="start" href="/#/servico/listar"  ng-click="openLeftMenu()" style="padding:0; margin:0"><md-icon>list</md-icon> Meus serviços</md-button>
+	        		</md-list-item>
+	        		<md-list-item class="md-1-line" style="padding:2px 0">
+			        	<md-button md-no-ink class="md-primary" layout-align="start" href="/#/servico/listar"  ng-click="openLeftMenu()" style="padding:0; margin:0"><md-icon>event_note</md-icon> Cadastrar Serviço</md-button>
+	        		</md-list-item>
+	        		<md-list-item class="md-1-line" style="padding:2px 0">
+			        	<md-button md-no-ink class="md-primary" layout-align="start" href="/#/servico/listar"  ng-click="openLeftMenu()" style="padding:0; margin:0"><md-icon>star_rate</md-icon> Minhas Avaliações</md-button>
+	        		</md-list-item>
+	        		<md-list-item class="md-1-line" style="padding:2px 0">
+			        	<md-button md-no-ink class="md-primary" layout-align="start" href="/#/solicitacoes/"  ng-click="openLeftMenu()" style="padding:0; margin:0"><md-icon>monetization_on</md-icon> Orçamentos <span class="md-primary" style="border: 2px solid; border-radius:7px; padding: 2px">{{qtdNotificacoes}}</span></md-button>
+	        		</md-list-item>
+	        	</md-list>
+	        </md-content>
+        </md-sidenav>
 		
-			<div class="item active" style="width:940px; heigth:350px"><h1><center>Workbook</center></h1></div>
-			<div class="item" ng-repeat="servico in servicos.data">
-				<a href="Servico/detalhar.html#/?servicoID={{servico.id}}"><img src="http://placehold.it/940x350" /></a>
-			</div>
-
-		</div>
-		</div>
+	  	<md-content flex ng-view >
+	    	
+	  	</md-content>
 	</div>
-
 </body>
 
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-</html>
-<!--<div class="item active" ng-controller="servicoController">primeiro</div>
-		
-		<div class="col-sm-6 col-md-6 col-lg-4 item" ng-repeat="servico in servicos.data">
-			<div class="thumbnail">
-				<img src="http://placehold.it/350x120" alt="">
-				<div class="caption">
+	
+	<script type="text/javascript" src="js/controllers/main.js"></script>
 
-				<h3><a href="/servico/detalhar/${{servico.id}}">{{servico.titulo}}</a></h3>
-				</div>
-				<div class="caption hidden-xs">
-					<p class="text-list">{{servico.descricao}}</p>
-				</div>
-	            <div class="caption ratings">
-	            	<input type="number" id="star-rating" class="rating" data-readonly="true" data-size="xs" value="{{servico.media }}" data-show-clear="false" data-show-caption="false">
-	           	</div>
-	         </div>
-		</div>
--->
+	<link rel="stylesheet" href="css/css.css"/>
+</html>
