@@ -1,0 +1,43 @@
+<md-content md-theme="docs-dark" layout-gt-sm="" layout-padding>
+	<form  ng-submit="submitForm(servico)" >
+		<input type="hidden" path="id" ng-model="servico.id"/>
+		<md-input-container>
+			<label>Titulo</label>
+			<input type="text" ng-model="servico.titulo" />
+		</md-input-container>
+			
+		<md-input-container>
+			<label for="descricao" class="col-sm-2 control-label" value="Descricao">Descrição</label>
+			
+			<input type="text" name="descricao" ng-model="servico.descricao" class="form-control"/>
+		
+		</md-input-container>
+		<md-input-container>
+			<label for="telefone" class="col-sm-2 control-label" value="telefone">Telefone</label>
+			<input ng-model="servico.telefone" value="servico.telefone" class="form-control" />
+		</md-input-container>
+		<md-input-container>
+			<label>Celular</label>
+			<input ng-model="servico.celular" value="servico.celular" class="form-control" />
+			
+		</md-input-container>
+		<md-input-container ng-controller="categoriaController">
+			<label for="categoria" class="col-sm-2 control-label" value="categoria">Categoria</label>
+				<md-select ng-model="servico.categoria">
+						<md-option ng-repeat="categoria in categorias" value="{{categoria.id}}">{{categoria.nome}}</md-option>
+				</md-select>
+		</md-input-container> 
+		
+		<md-input-container layout="row" >
+			<md-button>
+			    <md-icon class="material-icons">crop_original</md-icon>
+			    <label >Imagem</label>
+			</md-button>
+			<input ng-model="servico.imagem" base-sixty-four-input value="{{servico.imagem}}" type="file" />
+			
+		</md-input-container>	
+		<md-input-container>	
+     		<md-button type="submit">Enviar</button>
+     	</md-input-container>
+	</form>
+</md-content>

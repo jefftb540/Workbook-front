@@ -1,0 +1,15 @@
+<md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch ng-repeat="servico in servicos">
+<a href="/#/prestador/{{servico.usuario.id}}">
+	<md-card-title>
+		<md-card-title-text>
+		<span class="md-headline">{{servico.usuario.nome_fantasia}}</span>
+		<span>{{servico.titulo}}</span>
+		<span class="md-subhead">{{servico.usuario.totalAvaliacoes}} Avaliaçoes</span>
+		<span class="md-subhead"><md-icon ng-repeat="n in range(servico.usuario.mediaAvaliacoes)" class="material-icons step" aria-label="description">star</md-icon></span>
+		</md-card-title-text>
+		<md-card-title-media>
+			<div class="md-media-sm card-media"><img src="{{servico.usuario.imagem}}"></div>
+		</md-card-title-media>
+	</md-card-title>
+</a>
+</md-card>

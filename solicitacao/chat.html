@@ -1,0 +1,19 @@
+<div style="height:90%;overflow-y:scroll"  scroll="mensagens">
+	
+<div layout="column" ng-repeat="mensagem in mensagens">
+
+<md-card layout="row" ng-attr-layout-align="{{mensagem.usuario.id  == usuario_logado? 'end center':'' }}" flex="50">
+	<md-card-title>
+		<md-card-title-text ng-attr-layout-align="{{mensagem.usuario.id  == usuario_logado? 'end end':'' }}">
+		<span class="">{{mensagem.texto}}</span> 
+		<span class="md-subhead">{{mensagem.usuario.nome}}</span>
+		</md-card-title-text>
+	</md-card-title>
+</md-card>
+</div>
+</div>
+<div layout="row" layout-align="center end">
+	<md-input-container flex md-no-float >
+		<input type="text" ng-keyup="$event.keyCode == 13 && submitMessage(msg)" name="texto" ng-model="msg.texto" placeholder="Sua mensagem aqui"><md-icon ng-click="submitMessage(msg)">send</md-icon>
+	</md-input-container>
+</div>

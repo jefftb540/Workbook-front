@@ -1,0 +1,44 @@
+<md-tabs class="" layout-fill flex md-selected="data.selectedIndex" md-align-tabs="{{'bottom'}}" md-swipe-left="onSwipeLeft()" md-swipe-right="onSwipeRight()">
+	<md-tab id="tab1" ngCloak  >
+	    <md-tab-label>Solicitações</md-tab-label>
+	    <md-tab-body>
+	    	<div ng-repeat="s in solicitacoes">
+				<a href="/#/solicitacoes/{{s.id}}"><md-card>
+					
+					<md-card-content>
+						<h3>{{s.usuario.nome}}</h3>
+						<p><span ng-repeat="servico in s.servico">{{servico.titulo}},</span></p>
+					</md-card-content>
+					<md-card-footer>
+					{{s.data}}
+					</md-card-footer>
+					<div class="md-actions" layout="row|column" layout-align="start|end|center start|end|center">
+					   <md-button>{{s.status}}</md-button>
+					 </div>
+				</md-card>
+				</a>
+			</div>	
+	    </md-tab-body>
+    </md-tab>
+    <md-tab id="tab2">
+    	<md-tab-label>Orçamentos</md-tab-label>
+    	<md-tab-body>
+	    	<div ng-repeat="o in orcamentos">
+				<a href="/#/orcamento/chat/{{o.id}}"><md-card>
+					
+					<md-card-content>
+						<h3>{{o.solicitacao.usuario.nome}}</h3>
+						<p><span ng-repeat="servico in o.solicitacao.servico">{{servico.titulo}},</span></p>
+					</md-card-content>
+					<md-card-footer>
+					Valor orçado: {{o.valor}}
+					</md-card-footer>
+					<div class="md-actions" layout="row|column" layout-align="start|end|center start|end|center">
+					   <md-button>{{s.status}}</md-button>
+					 </div>
+				</md-card>
+				</a>
+			</div>	
+	    </md-tab-body>
+    </md-tab>
+</md-tabs>

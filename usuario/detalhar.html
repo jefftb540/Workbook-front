@@ -1,0 +1,64 @@
+<md-tabs class="" layout-fill flex md-selected="data.selectedIndex" md-align-tabs="{{'bottom'}}" md-swipe-left="onSwipeLeft()" md-swipe-right="onSwipeRight()">
+	<md-tab id="tab1" ngCloak  >
+	    <md-tab-label>Informações</md-tab-label>
+	    <md-tab-body>
+			<md-card>
+				<img class="md-card-image" style="height: 150px" src="{{usuario.imagem}}" alt="image caption">
+				<md-card-content>
+					<h2>{{usuario.nome_fantasia}}</h2>
+					<p>{{usuario.descricao}}</p>
+				</md-card-content>
+				<md-card-footer>
+				<div class="md-actions" layout="row|column" layout-align="start|end|center start|end|center">
+				   <md-button class="md-button md-primary"><a class="btn btn-success" href="/#/orcamento/solicitar/{{servico.usuario}}">Solicitar orçamento</a></md-button>
+				 </div>
+				</md-card-footer>
+				
+			</md-card>
+		</md-tab-body>
+	</md-tab>
+	<md-tab >
+		<md-tab-label>Serviços</md-tab-label>
+		<md-tab-body>
+			<div style="{{show? 'max-height: 90%;overflow-y:scroll':''}}">
+			<md-card md-theme="default" md-theme-watch ng-repeat="servico in servicos">
+				<!--<a href="/#/servico/{{servico.id}}">-->
+					<md-card-title ng-click="toogleSelected(servicos.indexOf(servico))">
+						<md-card-title-text>
+						<input type="checkbox" ng-model="servico.selected" hide checklist-model="ids.servicos" checklist-value="servico.id">
+						<span><md-icon style="{{servico.selected? 'color:#FF5722' : ''}}">check_circle</md-icon></span>
+						<span class="md-headline">{{servico.titulo}}</span>
+						<span class="md-subhead">{{servico.descricao}}</span>
+						</md-card-title-text>
+						<md-card-title-media>
+							<div class="md-media-sm card-media"><img src="{{servico.imagem}}"></div>
+						</md-card-title-media>
+					</md-card-title>
+				<!--</a>-->
+			</md-card>
+			</div>
+
+			<div style="{{show? 'height: 10%':'display:none'}}">
+				<md-button class="md-raised md-primary primary-text-color " ng-click="submitForm()" layout-fill  aria-label="description">Solicitar orçamento</md-button>
+			</div>
+		</md-tab-body>
+	</md-tab>
+	<md-tab >
+	  <md-tab-label>Avaliações</md-tab-label>
+	  <md-tab-body>
+		<div align="right"><h3>{{avaliacoes.length}} Avaliaçoes</h3><md-icon ng-repeat="n in range(servico.mediaAvaliacoes)" class="material-icons step" aria-label="description">star</md-icon></div>
+		<md-card ng-repeat="avaliacao in avaliacoes">
+			
+			<md-card-content>
+				<h2>{{avaliacao.avaliador.nome}}</h2>
+				<p>{{avaliacao.comentario}}</p>
+			</md-card-content>
+			<md-card-footer>
+			<md-icon ng-repeat="n in range(avaliacao.nota)" class="material-icons step" aria-label="description">star</md-icon>
+			</md-card-footer>
+		</md-card>
+	  </md-tab-body>
+	</md-tab>
+
+</md-tabs>
+

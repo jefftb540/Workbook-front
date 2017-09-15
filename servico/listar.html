@@ -1,0 +1,17 @@
+<md-card md-theme="{{ showDarkTheme ? 'dark-purple' : 'default' }}" md-theme-watch ng-repeat="servico in servicos">
+<a href="/#/servico/{{servico.id}}">
+	<md-card-title>
+		<md-card-title-text>
+		<span class="md-headline">{{servico.titulo}}</span>
+		<span class="md-subhead">{{servico.descricao}}</span>
+		</md-card-title-text>
+		<md-card-title-media>
+			<div class="md-media-sm card-media"><img src="{{servico.imagem}}"></div>
+		</md-card-title-media>
+	</md-card-title>
+	<md-card-actions layout="row" layout-align="end center">
+		<md-button>detalhar</md-button>
+		<md-button></md-button>
+	</md-card-actions>
+</a>
+</md-card>
